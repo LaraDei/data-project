@@ -2,8 +2,8 @@ import React from 'react';
 import * as d3 from 'd3';
 import { useD3 } from '../useD3';
 
-export default function TutorialPage({ data }) {
-  console.log(data)
+export default function BarGraph({ data }) {
+
     const ref = useD3(
         (svg) => {
           const height = 500;
@@ -68,9 +68,7 @@ export default function TutorialPage({ data }) {
       );
 
     return (
-        <div className="tutorial-page">
-            <p>D3</p>
-            <div className="bar-chart">
+        <div className="bar-graph">
                 <svg
                     ref={ref}
                     style={{
@@ -84,8 +82,6 @@ export default function TutorialPage({ data }) {
                     <g className="x-axis" />
                     <g className="y-axis" />
                 </svg>
-            </div>
-           
         </div>
     )
 }
