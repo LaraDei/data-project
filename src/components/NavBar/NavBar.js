@@ -12,6 +12,7 @@ export default function NavBar() {
         </div>
         <ul id='menu' className='menu'>
             <li className="logo"><Link to={'/'}>Data Project</Link></li>
+            <li><Link to={'/project'}>Create Project</Link></li>
             <li><Link to={'/tutorial'}>Tutorial</Link></li>
             <li><Link to={'/sign-in'}>Sign In/Out</Link></li>
             <li><Link to={'/sign-up'}>Create Account</Link></li>
