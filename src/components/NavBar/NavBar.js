@@ -11,7 +11,7 @@ export default function NavBar() {
         {/* <button className='icon' id='nav-button' onClick={e => this.handleNav()}><FontAwesomeIcon icon={faBars}/>{' '}</button> */}
         </div>
         <ul id='menu' className='menu'>
-            <li className="logo"><Link to={'/'}>Data Project</Link></li>
+            <li className="logo"><Link to={'/'}>Home</Link></li>
             <li><Link to={'/project'}>Create Project</Link></li>
             <li><Link to={'/tutorial'}>Tutorial</Link></li>
             <li><Link to={'/sign-in'}>Sign In/Out</Link></li>

@@ -3,7 +3,7 @@ import * as d3 from 'd3';
 import { useD3 } from '../useD3';
 
 export default function BarGraph({ data }) {
-
+console.log(data)
     const ref = useD3(
         (svg) => {
           const height = 500;
@@ -12,13 +12,13 @@ export default function BarGraph({ data }) {
     
           const x = d3
             .scaleBand()
-            .domain(data.map((d) => d.year))
+            .domain(data.map((d) => d.Brand))
             .rangeRound([margin.left, width - margin.right])
             .padding(0.1);
     
           const y1 = d3
             .scaleLinear()
-            .domain([0, d3.max(data, (d) => d.sales)])
+            .domain([0, d3.max(data, (d) => parseFloat(d.Stars))])
             .rangeRound([height - margin.bottom, margin.top]);
     
           const xAxis = (g) =>
@@ -59,10 +59,10 @@ export default function BarGraph({ data }) {
             .data(data)
             .join("rect")
             .attr("class", "bar")
-            .attr("x", (d) => x(d.year))
+            .attr("x", (d) => x(d.Brand))
             .attr("width", x.bandwidth())
-            .attr("y", (d) => y1(d.sales))
-            .attr("height", (d) => y1(0) - y1(d.sales));
+            .attr("y", (d) => y1( parseFloat(d.Stars)))
+            .attr("height", (d) => y1(0) - y1( parseFloat(d.Stars)));
         },
         [data.length]
       );
