@@ -3,7 +3,7 @@ import * as d3 from 'd3';
 import { useD3 } from '../useD3';
 
 export default function BarGraph({ data }) {
-console.log(data)
+// console.log(data)
     const ref = useD3(
         (svg) => {
           const height = 500;
