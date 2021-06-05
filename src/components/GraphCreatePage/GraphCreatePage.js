@@ -1,62 +1,58 @@
 import React, {useState} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {getCsv} from '../../features/csvSlice'
 import BarGraph from '../BarGraph/BarGraph'
 import Papa from "papaparse"
 
 export default function GraphCreatePage() {
 
+  const { csv, isLoading } = useSelector((state) => state.csv);
+  const dispatch = useDispatch();
 
-        const [state, setState] = useState({
-          csvfile: null,
-          data: [],
-          loged: false,
-          xAxis: "",
-          yAxix: "",
-          labeled: false
-    });
-
-    const handleChange = event => {
-        setState({
-            csvfile: event.target.files[0]
-          });
-      };
-
-    const importCSV = (e) => {
-        e.preventDefault();
-        const { csvfile } = state;
-    
-        Papa.parse(csvfile, {
-          complete: updateData,
-          header: true
-        });
-      }
-    const updateData = (result) =>{
-      console.log(result.data)
-      setState({
-            data: result.data,
-            loged: true
-          });
-      }
-  //   const updateValue= (value, key) => {
-  //     console.log(value)
-  //     console.log(key)
-  //       setState({ 
-  //         [key]: {value: value},
-  //         loged: true
-  //       })
-  //   }
+  const [state, setState] = useState({
+    csvfile: null,
+    graph: ""
+  });
   
-  // const updateLabeled= () => {
-  //     setState({ 
-  //       labeled: true
-  //     })
-  // }
+  const handleFile = (e) => {
+    setState({
+      csvfile: e.target.files[0],
+    });
+  };
+  
+  const importCSV = (e) => {
+    e.preventDefault();
+    e.target.reset()
+    const { csvfile } = state;
+    Papa.parse(csvfile, {
+      complete: updateData,
+      header: true,
+    });
+    
+  };
+  
+  const updateData = (result) => {
+    dispatch(getCsv(result.data));
+  };
+
+  const handleType = (e) => {
+    const {value, name} = e.target
+    setState({ [name]: {value: value}})
+    
+  };
 
 return(
     <div className="graph-create-page">
-        <form className="file-uploader" >
-            <input type="file" id="myFile" name="filename" onChange={handleChange}/>
-            <input type="submit" onClick={importCSV}/>
+        <form className="file-uploader"onSubmit={importCSV} >
+            <input type="file" id="csv" onChange={handleFile}/>
+            <button type="submit">Submit</button>
         </form>
+        <label htmlFor="graph-select">select graph type: </label>
+          <select id='graph-select' name="graph" onChange={handleType} required> 
+              <option value="" >...</option>
+              <option value="barGraph">Bar Graph</option>
+          </select>
+        .
         {/* <form className="graph-key">
           <label htmlFor="x-select">* x-Axis: </label>
           <select id='x-select' name="xAxis" onChange={e => updateValue(e.target.value, e.target.name)} required> 
@@ -78,11 +74,11 @@ return(
           </select>
           <input type="submit" onClick={updateLabeled}/>
         </form> */}
-        <div className="rendered-graph">
-            {state.labeled 
-            ?<BarGraph data={state.data}/> 
+        {/* <div className="rendered-graph">
+            {!isLoading 
+            ?<BarGraph data={csv}/> 
             : <p>please upload csv file</p>}
-        </div>
+        </div> */}
 
     </div>
 )

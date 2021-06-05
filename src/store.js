@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-
+import csvReducer from "./features/csvSlice"
+import barGraphReducer from "./features/barGraphSlice"
 
 export const store = configureStore({
   reducer: {
-    counter: "",
+    csv: csvReducer,
+    barGraph: barGraphReducer
   },
 });
