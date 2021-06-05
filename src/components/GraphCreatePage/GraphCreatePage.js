@@ -1,8 +1,5 @@
 import React, {useState} from 'react';
-// import * as d3 from 'd3';
-// import { useD3 } from '../useD3';
 import BarGraph from '../BarGraph/BarGraph'
-// import {data} from '../../DataStore'
 import Papa from "papaparse"
 
 export default function GraphCreatePage() {
@@ -39,20 +36,20 @@ export default function GraphCreatePage() {
             loged: true
           });
       }
-    const updateValue= (value, key) => {
-      console.log(value)
-      console.log(key)
-        setState({ 
-          [key]: {value: value},
-          loged: true
-        })
-    }
+  //   const updateValue= (value, key) => {
+  //     console.log(value)
+  //     console.log(key)
+  //       setState({ 
+  //         [key]: {value: value},
+  //         loged: true
+  //       })
+  //   }
   
-  const updateLabeled= () => {
-      setState({ 
-        labeled: true
-      })
-  }
+  // const updateLabeled= () => {
+  //     setState({ 
+  //       labeled: true
+  //     })
+  // }
 
 return(
     <div className="graph-create-page">
@@ -60,8 +57,7 @@ return(
             <input type="file" id="myFile" name="filename" onChange={handleChange}/>
             <input type="submit" onClick={importCSV}/>
         </form>
-        {state.loged 
-        ?<form className="graph-key">
+        {/* <form className="graph-key">
           <label htmlFor="x-select">* x-Axis: </label>
           <select id='x-select' name="xAxis" onChange={e => updateValue(e.target.value, e.target.name)} required> 
               <option value="" >...</option>
@@ -81,8 +77,7 @@ return(
               )}
           </select>
           <input type="submit" onClick={updateLabeled}/>
-        </form>
-        : <p>please upload csv file</p>}
+        </form> */}
         <div className="rendered-graph">
             {state.labeled 
             ?<BarGraph data={state.data}/> 
